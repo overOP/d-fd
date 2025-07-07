@@ -1,15 +1,12 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const Logout = () => {
-  const navigate = useNavigate();
-
+  const nav = useNavigate();
   useEffect(() => {
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("userData");
-    navigate("/signup", { replace: true });
-  }, [navigate]);
-
+    localStorage.clear();
+    nav("/signup", { replace: true });
+  }, [nav]);
   return null;
 };
 
