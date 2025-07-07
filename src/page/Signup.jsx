@@ -6,51 +6,38 @@ import Input from '../components/Input';
 import { http } from '../config/Axios';
 
 const SignUp = () => {
-  //it is used to navigate between pages
   const navigate = useNavigate();
   
   const {register, handleSubmit, formState: {errors}} = useForm();
 
-  //SignUp
 const signup = async (data) => {
   try {
-     // Uncomment the line below to use axios directly
     const response = await http.post('users/signUp', data);
-    // const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}users/signUp`, data);
     console.log(response.data);
     if (response.data.success) {
       alert('SignUp successful');
     }
-    // Store the token in local storage
     const accessToken = response.data.accessToken;
     localStorage.setItem('accessToken', accessToken);
-    // Store the user data in local storage
     const userData = response.data.user;
     localStorage.setItem('userData', JSON.stringify(userData));
-    // Redirect to the home page
     navigate('/');
   } catch (error) {
     console.error('Error:', error);
     alert('SignUp failed');
   }
 }
-  //Login
   const login = async (data) => {
     try {
-       // Uncomment the line below to use axios directly
       const response = await http.post('users/login', data);
-      // const response = await axios.post(`${import.meta.env.VITE_BACKEND_API}users/login`, data);
       console.log(response.data);
       if (response.data.success) {
         alert('Login successful');
       }
-      // Store the token in local storage
       const accessToken = response.data.accessToken;
       localStorage.setItem('accessToken', accessToken);
-      // Store the user data in local storage
       const userData = response.data.user;
       localStorage.setItem('userData', JSON.stringify(userData));
-      // Redirect to the home page
       navigate('/');
     } catch (error) {
       console.error('Error:', error);
@@ -70,7 +57,7 @@ const signup = async (data) => {
   };
 
   return (
-    <div className='flex items-center justify-center min-h-screen'>
+    <div className='flex items-center justify-center min-h-screen bg-blue-950'>
       <div className=" bg-white rounded-xl shadow-xl w-full max-w-md p-6">
         <div className="flex justify-center mb-6">
           <h2 id="formTitle" className="text-2xl font-bold">
