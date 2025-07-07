@@ -11,7 +11,7 @@ const SpareParts = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto p-6 bg-white rounded shadow">
+    <div className="max-w-5xl mx-auto p-6 bg-white rounded shadow mt-20">
       <h1 className="text-2xl font-bold mb-6">Spare Parts Inventory</h1>
 
       <div className="flex gap-4 mb-8">

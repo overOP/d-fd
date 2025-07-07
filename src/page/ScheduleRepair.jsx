@@ -14,7 +14,7 @@ const ScheduleRepair = () => {
 
   // very simple demo: just list tickets and allow the user to choose a date
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow">
+    <div className="max-w-4xl mx-auto p-6 bg-white rounded-lg shadow mt-20">
       <h1 className="text-2xl font-bold mb-6">Schedule Repair</h1>
       <ul className="space-y-4">
         {tickets.map((t) => (
