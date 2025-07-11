@@ -9,13 +9,10 @@ import {
 } from "recharts";
 import { useTickets } from "../store/ticketStore";
 
-/* ------------------------------------------------------------------ */
-/*  Utilities                                                         */
-/* ------------------------------------------------------------------ */
 const STATUS_LABELS = {
   OPEN: "Open",
   SCHEDULED: "Scheduled",
-  IN_REPAIR: "In Repair",
+  IN_REPAIR: "In Repair",
   COMPLETED: "Completed",
   CLOSED: "Closed",
 };
@@ -28,7 +25,6 @@ const STATUS_COLOURS = {
   CLOSED: "bg-gray-400",
 };
 
-/* resize hook – returns parent width */
 function useParentWidth() {
   const ref = useRef(null);
   const [width, setWidth] = useState(0);
@@ -51,12 +47,10 @@ export default function Dashboard() {
   const tickets = useTickets((s) => s.tickets);
   const fetchTickets = useTickets((s) => s.fetchTickets);
 
-  /* fetch once on mount */
   useEffect(() => {
-    if (tickets.length === 0) fetchTickets();
+    fetchTickets();
   }, [fetchTickets]);
 
-  /* group tickets → chart */
   const { grouped, chartData, total } = useMemo(() => {
     const grouped = tickets.reduce((acc, t) => {
       acc[t.status] = (acc[t.status] || 0) + 1;
@@ -69,14 +63,12 @@ export default function Dashboard() {
     };
   }, [tickets]);
 
-  /* container width for chart */
   const [containerRef, width] = useParentWidth();
 
   return (
     <div className="max-w-5xl mx-auto p-6 space-y-8" ref={containerRef}>
       <h1 className="text-3xl font-bold text-center text-white">Service Dashboard</h1>
 
-      {/* summary cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
         {Object.keys(STATUS_LABELS).map((key) => (
           <div
@@ -94,11 +86,10 @@ export default function Dashboard() {
         </div>
       </div>
 
-      {/* chart */}
       <div className="rounded-lg bg-white shadow p-4 overflow-x-auto">
         {width > 0 && (
           <BarChart
-            width={width - 32 /* padding */}
+            width={width - 32}
             height={350}
             data={chartData}
             margin={{ top: 10, right: 20, bottom: 40, left: 0 }}
@@ -120,7 +111,7 @@ export default function Dashboard() {
             />
             <Bar
               dataKey="count"
-              isAnimationActive={false} /* disable Recharts animation loop */
+              isAnimationActive={false}
               fill="url(#gradient)"
               radius={[4, 4, 0, 0]}
             />

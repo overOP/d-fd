@@ -9,9 +9,12 @@ const save = (t) => localStorage.setItem(key, JSON.stringify(t));
 export const useTickets = create((set) => ({
   tickets: load(),
 
+
+  fetchTickets: () => set(() => ({ tickets: load() })),
+
   addTicket: (data) =>
     set((s) => {
-      const ticket = { id: uuid(), status: "open", ...data };
+      const ticket = { id: uuid(), status: "OPEN", ...data };
       const next = [...s.tickets, ticket];
       save(next);
       return { tickets: next };
