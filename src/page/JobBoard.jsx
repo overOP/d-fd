@@ -7,9 +7,6 @@ import {
   Draggable,
 } from "@hello-pangea/dnd";
 
-/* ------------------------------------------------------------------ */
-/*  Zustand store – jobs persist in localStorage                      */
-/* ------------------------------------------------------------------ */
 const JOB_KEY = "jobs";
 
 const loadJobs = () => {
@@ -24,6 +21,7 @@ const saveJobs = (jobs) => {
   localStorage.setItem(JOB_KEY, JSON.stringify(jobs));
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useJobs = create((set) => ({
   jobs: loadJobs(),
 
@@ -43,9 +41,6 @@ export const useJobs = create((set) => ({
     }),
 }));
 
-/* ------------------------------------------------------------------ */
-/*  Component                                                         */
-/* ------------------------------------------------------------------ */
 
 const columns = ["todo", "inprogress", "done"];
 const columnTitles = {
