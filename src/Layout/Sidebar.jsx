@@ -3,15 +3,14 @@ import { NavLink } from "react-router";
 import { FaBars } from "react-icons/fa";
 import { navData } from "../Data/Data";
 import { useCart } from "../store/cartStore";
-import { CiLogout } from "react-icons/ci";
 import { IoIosSettings } from "react-icons/io";
-import { useNavigate } from "react-router";
+
 import logo from "../assets/logo.svg";
 
 const Sidebar = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
   const [isOpen, setIsOpen] = useState(window.innerWidth >= 768);
-  const nav = useNavigate();
+
   const cart = useCart((state) => state.cartItem);
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
@@ -28,11 +27,7 @@ const Sidebar = () => {
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
-  const logout = (e) => {
-    e.preventDefault();
-    localStorage.removeItem("accessToken");
-    nav("/login");
-  };
+
 
   return (
     <aside
